@@ -2,16 +2,11 @@
 session_start();
 include 'koneksi.php';
 
-// // Jika user belum login, redirect ke halaman login
-// if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-//     header('Location: index.php');
-//     exit;
-// }
-// if (!isset($_SESSION['username'])) {
-//     header('location:../index.php');
-// } elseif ($_SESSION['level'] != "admin") {
-//     header('location:../index.php');
-// }
+// Jika user belum login, redirect ke halaman login
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: ../index.php');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

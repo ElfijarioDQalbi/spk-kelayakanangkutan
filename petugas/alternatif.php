@@ -2,21 +2,11 @@
 session_start();
 include 'koneksi.php';
 
-// // Jika user belum login, redirect ke halaman login
-// if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-//     header('Location:../index.php');
-//     exit();
-// }
-// if(!isset($_SESSION['username'])){
-//     header('location:../index.php');
-// }
-// elseif($_SESSION['level'] != "petugas"){
-//     header('location:../index.php');
-// }
-// if (isset($_SESSION['level'])=="petugas" && !isset($_SESSION['username'])) {
-//     header('location: ../');
-//     exit;
-// }
+// Jika user belum login, redirect ke halaman login
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: ../index.php');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -71,12 +61,6 @@ include 'koneksi.php';
                             <h1 class="m-0"><b>Alternatif</b> Kelayakan Angkutan</h1>
                             <a>Mengelola alternatif angkutan yang akan diperiksa kelayakannya</a>
                         </div><!-- /.col -->
-                        <!-- <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="index.php.php">Beranda</a></li>
-                                <li class="breadcrumb-item active">Alternatif</li>
-                            </ol>
-                        </div>/.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -97,7 +81,7 @@ include 'koneksi.php';
                                 </button>
                             </div>
                             <?php
-                            session_destroy();
+                            unset($_SESSION['pesan']);
                             ?>
                         <?php
                         elseif (isset($_SESSION['berhasil'])) :
@@ -110,7 +94,7 @@ include 'koneksi.php';
                                 </button>
                             </div>
                             <?php
-                            session_destroy();
+                            unset($_SESSION['berhasil']);
                             ?>
                         <?php
                         elseif (isset($_SESSION['gagal'])) :
@@ -123,7 +107,7 @@ include 'koneksi.php';
                                 </button>
                             </div>
                         <?php
-                            session_destroy();
+                            unset($_SESSION['gagal']);
                         endif;
                         ?>
                     </div>
@@ -211,7 +195,7 @@ include 'koneksi.php';
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="alternatifT.php">
+                <form method="POST" action="alternatifT.php" class="formtambahalternatif" novalidate>
                     <div class="modal-body">
                         <div class="form-body">
                             <div class="row">
@@ -220,7 +204,7 @@ include 'koneksi.php';
                                         <label for="kodealternatif" class="mb-1">Kode Alternatif</label>
                                         <input type="text" id="kodealternatif" class="form-control" name="kodealternatif" placeholder="Masukkan kode alternatif disini…" autocomplete="off" maxlength="3" required>
                                         <div class="invalid-feedback">
-                                            Please input criteria code !
+                                            Please input alternative code !
                                         </div>
                                     </div>
                                 </div>
@@ -229,7 +213,7 @@ include 'koneksi.php';
                                         <label for="namaalternatif" class="mb-1">Nama Alternatif</label>
                                         <input type="text" id="namaalternatif" class="form-control" name="namaalternatif" placeholder="Masukkan nama alternatif disini…" autocomplete="off" maxlength="50" required>
                                         <div class="invalid-feedback">
-                                            Please input criteria name !
+                                            Please input alternative name !
                                         </div>
                                     </div>
                                 </div>
@@ -256,7 +240,7 @@ include 'koneksi.php';
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="alternatifE.php">
+                <form method="POST" action="alternatifE.php" class="formeditalternatif" novalidate>
                     <div class="modal-body">
                         <div class="form-body">
                             <input type="hidden" class="form-control" id="idalt" name="idalternatif" placeholder="Masukkan id alternatif disini…">
@@ -266,7 +250,7 @@ include 'koneksi.php';
                                         <label for="kodealternatif" class="mb-1">Kode Alternatif</label>
                                         <input type="text" class="form-control" id="kodealt" name="kodealternatif" placeholder="Masukkan kode alternatif disini…" autocomplete="off" maxlength="3" required>
                                         <div class="invalid-feedback">
-                                            Please input criteria code !
+                                            Please input alternative code !
                                         </div>
                                     </div>
                                 </div>
@@ -275,7 +259,7 @@ include 'koneksi.php';
                                         <label for="namaalternatif" class="mb-1">Nama Alternatif</label>
                                         <input type="text" class="form-control" id="namaalt" name="namaalternatif" placeholder="Masukkan nama alternatif disini…" autocomplete="off" maxlength="50" required>
                                         <div class="invalid-feedback">
-                                            Please input criteria name !
+                                            Please input alternative name !
                                         </div>
                                     </div>
                                 </div>
@@ -328,7 +312,7 @@ include 'koneksi.php';
     </div>
     <!-- /.modal edit alternatif -->
 
-    <!-- Modal Detail Kriteria -->
+    <!-- Modal Detail Alternatif -->
     <div class="modal fade" id="altdetailModal" tabindex="-1" role="dialog" aria-labelledby="altdetailModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -349,10 +333,10 @@ include 'koneksi.php';
             </div>
         </div>
     </div>
-    <!-- /.modal detail kriteria -->
-    
+    <!-- /.modal detail alternatif -->
+
     <script>
-        /* JQuary edit kriteria */
+        /* JQuary edit alternatif */
         $(document).ready(function() {
             $('.editbtnalt').click(function(e) {
                 e.preventDefault();
@@ -382,7 +366,7 @@ include 'koneksi.php';
             });
         });
 
-        // /* JQuary delete kriteria */
+        // /* JQuary delete alternatif */
         $(document).ready(function() {
             $('.deletebtnalt').click(function(e) {
                 e.preventDefault();
@@ -417,7 +401,7 @@ include 'koneksi.php';
             });
         });
 
-        /* JQuary detail kriteria */
+        /* JQuary detail alternatif */
         $(document).ready(function() {
             $('.viewbtnalt').click(function(e) {
                 e.preventDefault();
@@ -441,29 +425,67 @@ include 'koneksi.php';
                 });
             });
         });
+
+        /* JQuary validation form tambah */
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('formtambahalternatif');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
+        /* JQuary validation form edit */
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('formeditalternatif');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
     </script>
 
-        <!-- Bootstrap 4 -->
-        <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- ChartJS -->
-        <script src="plugins/chart.js/Chart.min.js"></script>
-        <!-- Sparkline -->
-        <script src="plugins/sparklines/sparkline.js"></script>
-        <!-- jQuery Knob Chart -->
-        <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-        <!-- daterangepicker -->
-        <script src="plugins/moment/moment.min.js"></script>
-        <script src="plugins/daterangepicker/daterangepicker.js"></script>
-        <!-- Tempusdominus Bootstrap 4 -->
-        <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-        <!-- Summernote -->
-        <script src="plugins/summernote/summernote-bs4.min.js"></script>
-        <!-- overlayScrollbars -->
-        <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="dist/js/adminlte.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="dist/js/demo.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="plugins/sparklines/sparkline.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="plugins/moment/moment.min.js"></script>
+    <script src="plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
 </body>
 
 </html>

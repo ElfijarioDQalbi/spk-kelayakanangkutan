@@ -2,16 +2,11 @@
 session_start();
 include 'koneksi.php';
 
-// // Jika user belum login, redirect ke halaman login
-// if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-//     header('Location: index.php');
-//     exit;
-// }
-// if (!isset($_SESSION['username'])) {
-//     header('location:../index.php');
-// } elseif ($_SESSION['level'] != "petugas") {
-//     header('location:../index.php');
-// }
+// Jika user belum login, redirect ke halaman login
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: ../index.php');
+    exit;
+}
 
 $query_alt = mysqli_query($db, "SELECT id_alternatif, kode_alternatif, nama_alternatif FROM alternatif ORDER BY id_alternatif ASC");
 $alt_array = array();
@@ -117,12 +112,6 @@ $data = get_penilaian($db);
                             <h1 class="m-0"><Strong>Penilaian</Strong> Kelayakan Angkutan</h1>
                             <a>Menentukan nilai bobot untuk setiap alternatif angkutan dengan menentukan nilai kriteria dan subkriteria nya masing-masing</a>
                         </div><!-- /.col -->
-                        <!-- <div class="col-sm-4">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard v1</li>
-                            </ol>
-                        </div>/.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -144,7 +133,7 @@ $data = get_penilaian($db);
                                 </button>
                             </div>
                             <?php
-                            session_destroy();
+                            unset($_SESSION['pesan']);
                             ?>
                         <?php
                         elseif (isset($_SESSION['berhasil'])) :
@@ -157,7 +146,7 @@ $data = get_penilaian($db);
                                 </button>
                             </div>
                             <?php
-                            session_destroy();
+                            unset($_SESSION['berhasil']);
                             ?>
                         <?php
                         elseif (isset($_SESSION['gagal'])) :
@@ -170,7 +159,7 @@ $data = get_penilaian($db);
                                 </button>
                             </div>
                         <?php
-                            session_destroy();
+                        unset($_SESSION['gagal']);
                         endif;
                         ?>
                     </div>

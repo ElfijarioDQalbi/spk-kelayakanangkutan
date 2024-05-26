@@ -40,32 +40,6 @@
                         <p>Alternatif</p>
                     </a>
                 </li>
-                <!-- <li class="nav-item ">
-                    <a href="#" class="nav-link ">
-                        <i class="nav-icon fas fa-table"></i>
-                        <p>Nilai Bobot <i class="right fas fa-angle-left"></i></p>
-                    </a>
-                    <ul class="nav nav-treeview" style="margin-left: 5px;">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link ">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Nilai Bobot Kriteria</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Nilai Bobot SubKriteria</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Nilai Bobot Alternatif</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li> -->
                 <li class="nav-item ">
                     <a href="penilaian.php" class="nav-link ">
                         <i class="nav-icon 	far fa-clipboard"></i>
@@ -84,12 +58,6 @@
                         <p>Hasil</p>
                     </a>
                 </li>
-                <!-- <li class="nav-item ">
-                    <a href="user.php" class="nav-link ">
-                        <i class="nav-icon fas fa-user"></i>
-                        <p>User</p>
-                    </a>
-                </li> -->
                 <li class="nav-item ">
                     <a href="akun.php" class="nav-link ">
                         <i class="nav-icon fas fa-user-circle"></i>

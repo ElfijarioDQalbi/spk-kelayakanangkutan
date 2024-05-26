@@ -11,4 +11,3 @@
         </ul>
     </nav>
 <!-- /.navbar -->
-<!-- style="position:fixed; width: 100%;" -->

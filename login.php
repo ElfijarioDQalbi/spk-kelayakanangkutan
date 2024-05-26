@@ -2,19 +2,6 @@
 session_start();
 include 'koneksi.php';
 
-// // Jika pengguna sudah login, arahkan mereka ke halaman beranda
-// if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
-//     if ($_SESSION['level'] == 'admin') {
-//         header('Location: admin/beranda.php');
-//     } elseif ($_SESSION['level'] == 'petugas') {
-//         header('Location: petugas/beranda.php');
-//     } else {
-//         // Jika level tidak sesuai, arahkan ke halaman beranda default
-//         header('Location: beranda.php');
-//     }
-//     exit();
-// }
-
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -29,7 +16,6 @@ if (isset($_POST['login'])) {
 
     if ($result && mysqli_num_rows($result) > 0) {
         $user = mysqli_fetch_assoc($result);
-        session_regenerate_id(true); // Tambahkan ini untuk keamanan
 
         $_SESSION['logged_in'] = true; // Set session untuk menandai bahwa pengguna telah masuk
         $_SESSION['id_user'] = $user['id_user'];
@@ -99,7 +85,7 @@ if (isset($_POST['login'])) {
                     ?>
                 </div>
 
-                <p class="login-box-msg"><b>Log in Account</b></p>
+                <p class="login-box-msg"><b>Sign in Account</b></p>
 
                 <form method="post">
                     <div class="input-group mb-3">

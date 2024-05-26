@@ -2,6 +2,11 @@
 session_start();
 include 'koneksi.php';
 
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: ../index.php');
+    exit();
+}
+
 if (isset($_POST['submit'])) {
     $nama = $_POST['namapetugas'];
     $username = $_POST['username'];

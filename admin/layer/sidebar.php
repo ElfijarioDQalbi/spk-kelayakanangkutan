@@ -22,62 +22,6 @@
                         <p> Informasi</p>
                     </a>
                 </li>
-                <!-- <li class="nav-item ">
-                    <a href="kriteria.php" class="nav-link ">
-                        <i class="nav-icon fas fa-th-large"></i>
-                        <p>Kriteria</p>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a href="subkriteria.php" class="nav-link ">
-                        <i class="nav-icon fas fa-th-list"></i>
-                        <p>SubKriteria</p>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a href="alternatif.php" class="nav-link ">
-                        <i class="nav-icon fas fa-bus"></i>
-                        <p>Alternatif</p>
-                    </a>
-                </li> -->
-                <!-- <li class="nav-item ">
-                    <a href="#" class="nav-link ">
-                        <i class="nav-icon fas fa-table"></i>
-                        <p>Nilai Bobot <i class="right fas fa-angle-left"></i></p>
-                    </a>
-                    <ul class="nav nav-treeview" style="margin-left: 5px;">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link ">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Nilai Bobot Kriteria</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Nilai Bobot SubKriteria</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Nilai Bobot Alternatif</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li> -->
-                <!-- <li class="nav-item ">
-                    <a href="penilaian.php" class="nav-link ">
-                        <i class="nav-icon 	far fa-clipboard"></i>
-                        <p>Penilaian</p>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a href="perhitungan.php" class="nav-link ">
-                        <i class="nav-icon fas fa-calculator"></i>
-                        <p>Perhitungan</p>
-                    </a>
-                </li> -->
                 <li class="nav-item ">
                     <a href="hasil.php" class="nav-link ">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -96,12 +40,6 @@
                         <p>Account</p>
                     </a>
                 </li>
-                <!-- <li class="nav-item ">
-                    <a href="akun.php" class="nav-link ">
-                        <i class="nav-icon fas fa-user-circle"></i>
-                        <p>Account</p>
-                    </a>
-                </li> -->
                 <li class="nav-item ">
                     <a href="logout.php" class="nav-link ">
                         <i class="nav-icon fas fa-sign-out-alt"></i>

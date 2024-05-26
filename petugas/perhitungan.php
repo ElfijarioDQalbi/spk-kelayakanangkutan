@@ -2,17 +2,11 @@
 session_start();
 include 'koneksi.php';
 
-// // Jika user belum login, redirect ke halaman login
-// if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-//     header('Location: index.php');
-//     exit;
-// }
-// if(!isset($_SESSION['username'])){
-//     header('location:../index.php');
-// }
-// elseif($_SESSION['level'] != "petugas"){
-//     header('location:../index.php');
-// }
+// Jika user belum login, redirect ke halaman login
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: ../index.php');
+    exit;
+}
 
 $query_kri = mysqli_query($db, "SELECT id_kriteria, kode_kriteria, nama_kriteria, bobot_kriteria, min, max, normalisasi FROM kriteria ORDER BY id_kriteria");
 $kri_array = array();
@@ -77,6 +71,7 @@ function get_penilaian($db)
 // Mendapatkan data bobot alternatif
 $data = get_penilaian($db);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -128,12 +123,6 @@ $data = get_penilaian($db);
                             <a>Melakukan perhitungan kelayakan angkutan dengan metode SMART (Simple Multi Atrribute Rating Technique) berdasarkan nilai yang didapatkan pada
                                 penilaian</a>
                         </div><!-- /.col -->
-                        <!-- <div class="col-sm-3">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard v1</li>
-                            </ol>
-                        </div>/.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>

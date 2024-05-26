@@ -2,6 +2,12 @@
 session_start();
 include 'koneksi.php';
 
+// Jika user belum login, redirect ke halaman login
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: ../index.php');
+    exit;
+}
+
 $result = $db->query("SELECT * FROM alternatif WHERE kode_alternatif='" . $db->real_escape_string($_GET['id']) . "'");
 $row = $result->fetch_assoc();
 
@@ -64,12 +70,6 @@ if (isset($_POST['save'])) {
                             <h1 class="m-0"><Strong>Update </Strong>penilaian alternatif</h1>
                             <a>Melakukan update penilaian dari alternatif untuk tiap kriteria</a>
                         </div><!-- /.col -->
-                        <!-- <div class="col-sm-4">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard v1</li>
-                            </ol>
-                        </div>/.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>

@@ -20,17 +20,19 @@
 <body class="hold-transition login-page">
 
   <div class="login-box">
-  <?php
+    <?php
     // Memuat file koneksi.php
     include 'koneksi.php';
 
     // Cek apakah pengguna sudah login
-    if (isset($_SESSION['username'])) {
-      // Jika sudah login, tampilkan halaman yang sesuai
-      include_once 'beranda.php';
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+      if ($_SESSION['level'] == 'admin') {
+        include 'admin/beranda.php';
+      } elseif ($_SESSION['level'] == 'petugas') {
+        include 'petugas/beranda.php';
+      }
     } else {
-      // Jika belum login, tampilkan halaman login
-      include_once 'login.php';
+      include 'login.php';
     }
     ?>
   </div>

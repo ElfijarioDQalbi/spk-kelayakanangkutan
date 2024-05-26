@@ -2,17 +2,11 @@
 session_start();
 include 'koneksi.php';
 
-// // Jika user belum login, redirect ke halaman login
-// if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-//     header('Location: index.php');
-//     exit;
-// }
-// if(!isset($_SESSION['username'])){
-//     header('location:../index.php');
-// }
-// elseif($_SESSION['level'] != "petugas"){
-//     header('location:../index.php');
-// }
+// Jika user belum login, redirect ke halaman login
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: ../index.php');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -67,12 +61,6 @@ include 'koneksi.php';
                             <h1 class="m-0"><b>Subkriteria</b> Kelayakan Angkutan</h1>
                             <a>Mengelola subkriteria tiap kriteria yang digunakan untuk menentukan kelayakan angkutan</a>
                         </div><!-- /.col -->
-                        <!-- <div class="col-sm-4">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="beranda.php">Beranda</a></li>
-                                <li class="breadcrumb-item active">Subkriteria</li>
-                            </ol>
-                        </div>/.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -93,7 +81,7 @@ include 'koneksi.php';
                                 </button>
                             </div>
                             <?php
-                            session_destroy();
+                            unset($_SESSION['pesan']);
                             ?>
                         <?php
                         elseif (isset($_SESSION['berhasil'])) :
@@ -106,7 +94,7 @@ include 'koneksi.php';
                                 </button>
                             </div>
                             <?php
-                            session_destroy();
+                            unset($_SESSION['berhasil']);
                             ?>
                         <?php
                         elseif (isset($_SESSION['gagal'])) :
@@ -119,7 +107,7 @@ include 'koneksi.php';
                                 </button>
                             </div>
                         <?php
-                            session_destroy();
+                        unset($_SESSION['gagal']);
                         endif;
                         ?>
                     </div>

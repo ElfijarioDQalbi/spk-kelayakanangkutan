@@ -2,6 +2,12 @@
 session_start();
 include 'koneksi.php';
 
+// Jika user belum login, redirect ke halaman login
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: ../index.php');
+    exit;
+}
+
 //edit form
 if (isset($_POST['click_editakun_btn'])) {
     $id = $_POST['idakun'];
@@ -38,24 +44,3 @@ if (isset($_POST['save'])) {
         header('Location: akun.php');
     }
 }
-    // $cekduplikat    = mysqli_num_rows(mysqli_query($db, "SELECT * FROM kriteria WHERE kode_kriteria ='$kodekriteria' and nama_kriteria='$namakriteria'"));
-
-    // if ($cekduplikat > 0) {
-    //     $_SESSION['pesan'] = " Maaf, Data sudah ada sebelumnya";
-    //     header('Location: kriteria.php');
-    // } else {
-    //     $query = "UPDATE kriteria 
-    //     SET kode_kriteria = '$kodekriteria',
-    //     nama_kriteria = '$namakriteria' 
-    //     WHERE id_kriteria='$id'";
-    //     $result = mysqli_query($db, $query);
-
-    //     if ($result) {
-    //         $_SESSION['berhasil'] = "Data berhasil diperbarui";
-    //         header('Location: kriteria.php');
-    //     } else {
-    //         $_SESSION['gagal'] = "gagal diperbarui";
-    //         header('Location: kriteria.php');
-    //     }
-    // }
-

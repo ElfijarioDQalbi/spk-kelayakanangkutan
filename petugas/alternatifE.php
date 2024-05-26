@@ -2,6 +2,12 @@
 session_start();
 include 'koneksi.php';
 
+// Jika user belum login, redirect ke halaman login
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: ../index.php');
+    exit;
+}
+
 //edit form
 if (isset($_POST['click_altedit_btn'])) {
     $id = $_POST['altdi'];

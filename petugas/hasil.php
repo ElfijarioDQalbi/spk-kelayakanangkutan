@@ -2,17 +2,11 @@
 session_start();
 include 'koneksi.php';
 
-// // Jika user belum login, redirect ke halaman login
-// if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-//     header('Location: index.php');
-//     exit;
-// }
-// if(!isset($_SESSION['username'])){
-//     header('location:../index.php');
-// }
-// elseif($_SESSION['level'] != "petugas"){
-//     header('location:../index.php');
-// }
+// Jika user belum login, redirect ke halaman login
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: ../index.php');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,12 +58,6 @@ include 'koneksi.php';
                             <h1 class="m-0"><strong>Hasil</strong> Kelayakan Angkutan</h1>
                             <a>Menampilkan hasil akhir proses perhitungan penentuan kelayakan angkutan</a>
                         </div><!-- /.col -->
-                        <!-- <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard v1</li>
-                            </ol>
-                        </div>/.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
