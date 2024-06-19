@@ -148,7 +148,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                                                     <a href="#" class="btn btn-info btn-sm viewbtnalt"><i class="fas fa-info-circle nav-icon "></i> Detail</a>
                                                     <a href="#" class="btn btn-warning btn-sm editbtnalt"><i class="fas fa-edit nav-icon "></i> Edit</a>
                                                     <a href="#" class="btn btn-danger btn-sm deletebtnalt"><i class="fas fa-trash-alt nav-icon "></i> Hapus</a>
-                                                    <!-- <a href="#" class="btn btn-danger btn-sm confirmdeletebtn"><i class="fas fa-trash-alt nav-icon "></i> Confirm Hapus</a> -->
                                                 </td>
                                             </tr>
                                         <?php
@@ -263,42 +262,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-12">
-                                    <div class="form-group mb-3">
-                                        <label for="namapemilik" class="mb-1">Nama Pemilik</label>
-                                        <input type="text" class="form-control" id="namapmlk" name="namapemilik" placeholder="Masukkan nama pemilik disini…" autocomplete="off" maxlength="50" required>
-                                        <div class="invalid-feedback">
-                                            Please input owner name !
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group mb-3">
-                                        <label for="alamatpemilik" class="mb-1">Alamat Pemilik</label>
-                                        <input type="text" class="form-control" id="alamatpmlk" name="alamatpemilik" placeholder="Masukkan alamat pemilik disini…" autocomplete="off" maxlength="50" required>
-                                        <div class="invalid-feedback">
-                                            Please input owner address !
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group mb-3">
-                                        <label for="merktipe" class="mb-1">Merk / Tipe</label>
-                                        <input type="text" class="form-control" id="merktipe" name="merktipe" placeholder="Masukkan merk/tipe angkutan disini…" autocomplete="off" maxlength="50" required>
-                                        <div class="invalid-feedback">
-                                            Please input brand/type !
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group mb-3">
-                                        <label for="tanggalpemeriksaan" class="mb-1">Tanggal Pemeriksaan</label>
-                                        <input type="date" class="form-control" id="tglperiksa" name="tanggalpemeriksaan" placeholder="Masukkan alamat pemilik disini…" autocomplete="off" maxlength="50" required>
-                                        <div class="invalid-feedback">
-                                            Please input inspection date !
-                                        </div>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -342,7 +305,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                 e.preventDefault();
 
                 var altdi = $(this).closest('tr').find('.altdi').text();
-                // console.log(no_urut); 
 
                 $.ajax({
                     method: "POST",
@@ -352,10 +314,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                         'altdi': altdi,
                     },
                     success: function(response) {
-                        //   console.log(response);  
 
                         $.each(response, function(Key, value) {
-                            // console.log(value['kode_kriteria']);
                             $('#idalt').val(value['id_alternatif']);
                             $('#kodealt').val(value['kode_alternatif']);
                             $('#namaalt').val(value['nama_alternatif']);
@@ -370,10 +330,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
         $(document).ready(function() {
             $('.deletebtnalt').click(function(e) {
                 e.preventDefault();
-                // console.log('hellow');
 
                 var altdi = $(this).closest('tr').find('.altdi').text();
-                // console.log(no_urut);
 
                 $.ajax({
                     method: "POST",
@@ -384,17 +342,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                     },
                     success: function(response) {
                         window.location.reload();
-                        // $('#alert').html(
-                        //     `
-                        //         <div class="alert alert-success alert-dismissible fade show">
-                        //             <i class="	fas fa-check-circle nav-icon"></i>
-                        //             <strong>` + response + `</strong>
-                        //             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        //                 <span aria-hidden="true">&times;</span>
-                        //             </button>
-                        //         </div>
-                        //     `
-                        // )
                     }
                 });
 
@@ -406,9 +353,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             $('.viewbtnalt').click(function(e) {
                 e.preventDefault();
 
-
                 var altdi = $(this).closest('tr').find('.altdi').text();
-
 
                 $.ajax({
                     method: "POST",
@@ -418,7 +363,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                         'altdi': altdi,
                     },
                     success: function(response) {
-                        // console.log(response);  
                         $('.view_altuser_data').html(response);
                         $('#altdetailModal').modal('show');
                     }

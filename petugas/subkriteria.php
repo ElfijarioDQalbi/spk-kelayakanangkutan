@@ -260,37 +260,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                         <button type="submit" class="btn btn-primary me-1 mb-1" name="submit">Submit</button>
                     </div>
                 </form>
-
-                <!-- <form method="POST" action="kriteriaT.php" class="formtambahkriteria" novalidate>
-                    <div class="modal-body">
-                        <div class="form-body">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group mb-3">
-                                        <label for="kodekriteria" class="mb-1">Kode Kriteria</label>
-                                        <input type="text" id="kodekriteria" class="form-control" name="kodekriteria" placeholder="Masukkan kode kriteria disini…" autocomplete="off" maxlength="3" required>
-                                        <div class="invalid-feedback">
-                                            Please input criteria code !
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group mb-3">
-                                        <label for="namakriteria" class="mb-1">Nama Kriteria</label>
-                                        <input type="text" id="namakriteria" class="form-control" name="namakriteria" placeholder="Masukkan nama kriteria disini…" autocomplete="off" maxlength="50" required>
-                                        <div class="invalid-feedback">
-                                            Please input criteria name !
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="reset" class="btn btn-secondary me-1 mb-1">Reset</button>
-                        <button type="submit" class="btn btn-primary me-1 mb-1" name="submit">Submit</button>
-                    </div>
-                </form> -->
             </div>
         </div>
     </div>
@@ -395,10 +364,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
         $(document).ready(function() {
             $('.deletebtnsub').click(function(e) {
                 e.preventDefault();
-                // console.log('hellow');
 
                 var subkri = $(this).closest('tr').find('.subkri').text();
-                // console.log(subkri);
 
                 $.ajax({
                     method: "POST",
@@ -409,17 +376,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                     },
                     success: function(response) {
                         window.location.reload();
-                        // $('#alert').html(
-                        //     `
-                        //         <div class="alert alert-success alert-dismissible fade show">
-                        //             <i class="	fas fa-check-circle nav-icon"></i>
-                        //             <strong>` + response + `</strong>
-                        //             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        //                 <span aria-hidden="true">&times;</span>
-                        //             </button>
-                        //         </div>
-                        //     `
-                        // )
                     }
                 });
 
@@ -432,7 +388,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                 e.preventDefault();
 
                 var subkri = $(this).closest('tr').find('.subkri').text();
-                // console.log(no_urut); 
 
                 $.ajax({
                     method: "POST",
@@ -442,10 +397,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                         'subkri': subkri,
                     },
                     success: function(response) {
-                        //   console.log(response);  
 
                         $.each(response, function(Key, value) {
-                            // console.log(value['kode_kriteria']);
                             $('#idsub').val(value['id_subkriteria']);
                             $('#idk').val(value['id_kriteria']);
                             $('#kodesub').val(value['kode_subkriteria']);
@@ -463,9 +416,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             $('.viewbtnsub').click(function(e) {
                 e.preventDefault();
 
-
                 var subkri = $(this).closest('tr').find('.subkri').text();
-
 
                 $.ajax({
                     method: "POST",
@@ -475,7 +426,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                         'subkri': subkri,
                     },
                     success: function(response) {
-                        // console.log(response);  
                         $('.view_subuser_data').html(response);
                         $('#subdetailModal').modal('show');
                     }

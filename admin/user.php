@@ -291,10 +291,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
         $(document).ready(function() {
             $('.deletebtnuser').click(function(e) {
                 e.preventDefault();
-                // console.log('hellow');
 
                 var iduser = $(this).closest('tr').find('.iduser').text();
-                // console.log(no_urut);
 
                 $.ajax({
                     method: "POST",
@@ -305,17 +303,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                     },
                     success: function(response) {
                         window.location.reload();
-                        // $('#alert').html(
-                        //     `
-                        //         <div class="alert alert-success alert-dismissible fade show">
-                        //             <i class="	fas fa-check-circle nav-icon"></i>
-                        //             <strong>` + response + `</strong>
-                        //             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        //                 <span aria-hidden="true">&times;</span>
-                        //             </button>
-                        //         </div>
-                        //     `
-                        // )
                     }
                 });
 

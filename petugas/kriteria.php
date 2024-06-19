@@ -156,7 +156,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                                                     <a href="#" class="btn btn-info btn-sm viewbtn"><i class="fas fa-info-circle nav-icon "></i> Detail</a>
                                                     <a href="#" class="btn btn-warning btn-sm editbtn"><i class="fas fa-edit nav-icon "></i> Edit</a>
                                                     <a href="#" class="btn btn-danger btn-sm deletebtn"><i class="fas fa-trash-alt nav-icon "></i> Hapus</a>
-                                                    <!-- <a href="#" class="btn btn-danger btn-sm confirmdeletebtn"><i class="fas fa-trash-alt nav-icon "></i> Confirm Hapus</a> -->
                                                 </td>
                                             </tr>
                                         <?php
@@ -348,7 +347,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                         'idkri': idkri,
                     },
                     success: function(response) {
-                        // console.log(response);  
                         $('.view_user_data').html(response);
                         $('#detailModal').modal('show');
                     }
@@ -362,7 +360,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                 e.preventDefault();
 
                 var idkri = $(this).closest('tr').find('.idkri').text();
-                // console.log(no_urut); 
 
                 $.ajax({
                     method: "POST",
@@ -372,10 +369,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                         'idkri': idkri,
                     },
                     success: function(response) {
-                        //   console.log(response);  
 
                         $.each(response, function(Key, value) {
-                            // console.log(value['kode_kriteria']);
                             $('#id').val(value['id_kriteria']);
                             $('#kode').val(value['kode_kriteria']);
                             $('#nama').val(value['nama_kriteria']);
@@ -391,11 +386,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
         $(document).ready(function() {
             $('.deletebtn').click(function(e) {
                 e.preventDefault();
-                // console.log('hellow');
 
                 var idkri = $(this).closest('tr').find('.idkri').text();
-
-                // console.log(no_urut);
 
                 $.ajax({
                     method: "POST",
@@ -406,17 +398,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                     },
                     success: function(response) {
                         window.location.reload();
-                        // $('#alert').html(
-                        //     `
-                        //         <div class="alert alert-success alert-dismissible fade show">
-                        //             <i class="	fas fa-check-circle nav-icon"></i>
-                        //             <strong>` + response + `</strong>
-                        //             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        //                 <span aria-hidden="true">&times;</span>
-                        //             </button>
-                        //         </div>
-                        //     `
-                        // )
                     }
                 });
 
