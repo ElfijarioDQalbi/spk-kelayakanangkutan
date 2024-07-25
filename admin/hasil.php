@@ -58,12 +58,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                             <h1 class="m-0"><strong>Hasil</strong> Kelayakan Angkutan</h1>
                             <a>Menampilkan hasil akhir proses perhitungan penentuan kelayakan angkutan</a>
                         </div><!-- /.col -->
-                        <!-- <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard v1</li>
-                            </ol>
-                        </div>/.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -78,6 +72,12 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                             <b>Hasil Akhir</b>
                         </div>
                         <div class="card-body">
+                            <form class="form-inline" method="get" action="">
+                                <input class="form-control mr-sm-2" type="search" name="search" placeholder="Cari Nomor Angkutan....." aria-label="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cari</button>
+                                <a href="hasil.php" class="btn btn-outline-secondary my-2 my-sm-0 ml-2">Refresh</a>
+                            </form>
+                            <br>
                             <div class="table-responsive">
                                 <table class="table-bordered table-hover table-sm" width="100%">
                                     <thead class="thead-light">
@@ -88,14 +88,28 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                                             <th class="text-center">Keterangan</th>
                                             <th class="text-center">Action</th>
                                         </tr>
-                                        <tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $no = 1;
-                                        $query = mysqli_query($db, "SELECT * FROM alternatif ORDER BY id_alternatif ASC");
-                                        if (mysqli_num_rows($query) > 0) {
-                                            while ($r = mysqli_fetch_assoc($query)) {
+
+                                        // Batasan dan halaman
+                                        $batas = 5;
+                                        $halaman = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
+                                        $posisi = ($halaman - 1) * $batas;
+                                        $no = $posisi + 1;
+
+                                        // Pencarian
+                                        $search = isset($_GET['search']) ? $_GET['search'] : '';
+
+                                        // Query dengan pencarian
+                                        $query = $db->prepare("SELECT * FROM alternatif WHERE nama_alternatif LIKE ? ORDER BY id_alternatif ASC LIMIT ?, ?");
+                                        $search_param = "%{$search}%";
+                                        $query->bind_param('sii', $search_param, $posisi, $batas);
+                                        $query->execute();
+                                        $result = $query->get_result();
+
+                                        if ($result->num_rows > 0) {
+                                            while ($r = $result->fetch_assoc()) {
                                         ?>
                                                 <tr>
                                                     <td class="text-center"><?php echo $no++; ?></td>
@@ -121,13 +135,47 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                                         } else {
                                             ?>
                                             <tr>
-                                                <td colspan="4" class="text-center"><i>Not Record Found</i></td>
+                                                <td colspan="5" class="text-center"><i>Not Record Found</i></td>
                                             </tr>
                                         <?php
                                         }
                                         ?>
                                     </tbody>
                                 </table>
+                                <br>
+                                <?php
+                                // Pagination
+                                $query2 = $db->prepare("SELECT COUNT(*) as total FROM alternatif WHERE nama_alternatif LIKE ?");
+                                $query2->bind_param('s', $search_param);
+                                $query2->execute();
+                                $result2 = $query2->get_result();
+                                $row = $result2->fetch_assoc();
+                                $jlhdata = $row['total'];
+                                $jlhhalaman = ceil($jlhdata / $batas);
+                                ?>
+                                <nav>
+                                    <ul class="pagination justify-content">
+                                        <?php
+                                        if ($halaman > 1) {
+                                            $previous = $halaman - 1;
+                                            echo "<li class='page-item'><a class='page-link' href='?halaman=$previous&search=$search'>Previous</a></li>";
+                                        }
+
+                                        for ($i = 1; $i <= $jlhhalaman; $i++) {
+                                            if ($i != $halaman) {
+                                                echo "<li class='page-item'><a class='page-link' href='?halaman=$i&search=$search'>$i</a></li>";
+                                            } else {
+                                                echo "<li class='page-item active'><a class='page-link' href='#'>$i</a></li>";
+                                            }
+                                        }
+
+                                        if ($halaman < $jlhhalaman) {
+                                            $next = $halaman + 1;
+                                            echo "<li class='page-item'><a class='page-link' href='?halaman=$next&search=$search'>Next</a></li>";
+                                        }
+                                        ?>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>

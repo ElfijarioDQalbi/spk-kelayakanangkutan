@@ -93,7 +93,7 @@ if (isset($_POST['save'])) {
                                     INNER JOIN alternatif a ON a.id_alternatif= ba.id_alternatif
                                     INNER JOIN kriteria k ON k.id_kriteria=ba.id_kriteria  
                                     LEFT JOIN subkriteria s ON s.id_subkriteria = ba.id_subkriteria
-                                    WHERE a.kode_alternatif='" . $db->real_escape_string($_GET['id']) . "' ORDER BY kode_kriteria");
+                                    WHERE a.kode_alternatif='" . $db->real_escape_string($_GET['id']) . "' ORDER BY id_kriteria");
 
                                     // Periksa apakah query berhasil dieksekusi
                                     if ($query && $query->num_rows > 0) {

@@ -8,7 +8,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 }
 
 if (isset($_POST['submit'])) {
-    $nama = $_POST['namapetugas'];
+    $nama = ucwords($_POST['namapetugas']);
     $username = $_POST['username'];
     $level = $_POST['level'];
     $password = $_POST['password'];

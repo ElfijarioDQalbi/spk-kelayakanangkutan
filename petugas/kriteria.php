@@ -109,10 +109,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                     </div>
 
                     <div></div>
-                    <div class="callout callout-info">
-                        <h5><b>Perhatian!</b></h5>
-                        <p>Nilai dari Total bobot kriteria harus <b>bernilai 100.</b> </p>
-                    </div>
 
                     <div class="card">
                         <div class="card-header bg-gradient-blue">

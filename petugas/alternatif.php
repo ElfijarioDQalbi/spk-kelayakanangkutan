@@ -184,6 +184,23 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     </div>
     <!-- ./wrapper -->
 
+    <?php
+    $query = mysqli_query($db, "SELECT max(kode_alternatif) as kodeTerbesar FROM alternatif");
+    if ($query) {
+        $data = mysqli_fetch_array($query);
+        $kodeAlt = $data['kodeTerbesar'];
+    
+        
+        // Ekstrak angka dari kode
+        preg_match('/(\d+)$/', $kodeAlt, $matches);
+        $urutan = (int) $matches[1];
+        $urutan++;
+        
+        $huruf = "A";
+        $kodeAlt = $huruf . sprintf("%03d", $urutan);
+    
+    } 
+    ?>
     <!-- Modal Tambah Alternatif -->
     <div class="modal fade" id="alttambahModal" tabindex="-1" role="dialog" aria-labelledby="alttambahModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -201,7 +218,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                                 <div class="col-12">
                                     <div class="form-group mb-3">
                                         <label for="kodealternatif" class="mb-1">Kode Alternatif</label>
-                                        <input type="text" id="kodealternatif" class="form-control" name="kodealternatif" placeholder="Masukkan kode alternatif disini…" autocomplete="off" maxlength="3" required>
+                                        <input type="text" id="kodealternatif" class="form-control" name="kodealternatif" value="<?php echo $kodeAlt ?>" autocomplete="off" maxlength="4" readonly required>
                                         <div class="invalid-feedback">
                                             Please input alternative code !
                                         </div>
@@ -247,7 +264,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                                 <div class="col-12">
                                     <div class="form-group mb-3">
                                         <label for="kodealternatif" class="mb-1">Kode Alternatif</label>
-                                        <input type="text" class="form-control" id="kodealt" name="kodealternatif" placeholder="Masukkan kode alternatif disini…" autocomplete="off" maxlength="3" required>
+                                        <input type="text" class="form-control" id="kodealt" name="kodealternatif" placeholder="Masukkan kode alternatif disini…" autocomplete="off" maxlength="4" readonly required>
                                         <div class="invalid-feedback">
                                             Please input alternative code !
                                         </div>

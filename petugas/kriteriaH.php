@@ -11,6 +11,14 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 if (isset($_POST['click_delete_btn'])) {
     $idk = $_POST['idkri'];
 
+    // Hapus data dari tabel kriteria
+    $query = "DELETE FROM perhitungan WHERE id_kriteria='$idk'";
+    $result = mysqli_query($db, $query);
+
+    // Hapus data dari tabel kriteria
+    $query = "DELETE FROM penilaian WHERE id_kriteria='$idk'";
+    $result = mysqli_query($db, $query);
+
     // Hapus data dari tabel subkriteria
     $query = "DELETE FROM subkriteria WHERE id_kriteria='$idk'";
     $result = mysqli_query($db, $query);

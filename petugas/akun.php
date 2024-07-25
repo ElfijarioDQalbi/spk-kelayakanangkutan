@@ -89,6 +89,11 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
+                            <script>
+                                setTimeout(function() {
+                                    window.location.href = "../index.php";
+                                }, 3000); // 3 detik
+                            </script>
                             <?php
                             unset($_SESSION['berhasil']);
                             ?>
